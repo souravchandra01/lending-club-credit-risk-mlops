@@ -1,0 +1,26 @@
+required_columns:
+  numerical:
+    - loan_amnt
+    - int_rate
+    - installment
+    - annual_inc
+    - dti
+    - open_acc
+    - pub_rec
+    - revol_bal
+    - revol_util
+    - total_acc
+    - pub_rec_bankruptcies
+    - emp_length
+    - term
+ 
+  categorical:
+    - grade
+    - sub_grade
+    - home_ownership
+    - verification_status
+    - purpose
+    - initial_list_status
+    - application_type
+    - loan_status
+ 
