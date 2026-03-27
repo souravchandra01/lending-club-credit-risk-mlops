@@ -28,9 +28,10 @@ EXPECTED_ACCURACY: float = 0.60
 MODEL_EVALUATION_THRESHOLD: float = 0.02
 
 # AWS
-AWS_REGION: str = os.getenv("AWS_DEFAULT_REGION", "us-east-1")
+AWS_REGION: str = os.getenv("AWS_DEFAULT_REGION", "ap-south-1")
 MODEL_BUCKET_NAME: str = os.getenv("MODEL_BUCKET_NAME", "lending-club-mlops-models")
 S3_MODEL_KEY: str = "model-registry/model.pkl"
+S3_PREPROCESSOR_KEY: str = "model-registry/preprocessor.pkl"
 
 # MLflow
 MLFLOW_TRACKING_URI: str = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000")

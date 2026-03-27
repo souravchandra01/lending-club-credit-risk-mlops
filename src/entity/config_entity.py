@@ -12,6 +12,7 @@ from config.constants import (
     MODEL_FILE_NAME,
     MODEL_BUCKET_NAME,
     S3_MODEL_KEY,
+    S3_PREPROCESSOR_KEY,
     EXPECTED_ACCURACY,
     MODEL_EVALUATION_THRESHOLD,
 )
@@ -82,3 +83,15 @@ class ModelTrainerConfig:
     n_estimators: int = 100
     class_weight: str = "balanced"
 
+@dataclass
+class ModelEvaluationConfig:
+    changed_threshold: float = MODEL_EVALUATION_THRESHOLD
+    bucket_name: str = MODEL_BUCKET_NAME
+    s3_model_key: str = S3_MODEL_KEY
+ 
+ 
+@dataclass
+class ModelPusherConfig:
+    bucket_name: str = MODEL_BUCKET_NAME
+    s3_model_key: str = S3_MODEL_KEY
+    s3_preprocessor_key: str = S3_PREPROCESSOR_KEY
