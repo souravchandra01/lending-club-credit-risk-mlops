@@ -1,19 +1,18 @@
-pandas
-numpy
+pandas==2.3.3
+numpy==1.26.4
 
-scikit-learn
-xgboost
-lightgbm
+scikit-learn==1.7.2
+xgboost==3.2.0
+lightgbm==4.6.0
 
-mlflow
+mlflow==3.10.1
 
-boto3
+boto3==1.42.75
 
-fastapi
-uvicorn
+fastapi==0.135.2
+uvicorn==0.42.0
 
-python-dotenv
-joblib
+python-dotenv==1.2.2
+joblib==1.5.3
 
-pytest
-pyyaml
+pyyaml==6.0.3

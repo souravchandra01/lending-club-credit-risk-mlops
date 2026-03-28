@@ -1,0 +1,83 @@
+name: Deploy Lending Club MLOps to AWS
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - '*.md'
+
+jobs:
+  ci-cd:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Docker image
+        run: |
+          docker build -t lending-club-mlops:latest .
+
+      - name: Tag and push to ECR
+        env:
+          ECR_REPO: ${{ secrets.ECR_REPO }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker tag lending-club-mlops:latest $ECR_REPO:$IMAGE_TAG
+          docker tag lending-club-mlops:latest $ECR_REPO:latest
+          docker push $ECR_REPO:$IMAGE_TAG
+          docker push $ECR_REPO:latest
+
+      - name: Stop existing container
+        run: |
+          docker stop lending-club-mlops || true
+          docker rm lending-club-mlops || true
+
+      - name: Pull latest image from ECR
+        env:
+          ECR_REPO: ${{ secrets.ECR_REPO }}
+        run: |
+          docker pull $ECR_REPO:latest
+
+      - name: Run new container
+        env:
+          ECR_REPO: ${{ secrets.ECR_REPO }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          MODEL_BUCKET_NAME: ${{ secrets.MODEL_BUCKET_NAME }}
+        run: |
+          docker run -d \
+            --name lending-club-mlops \
+            -p 8000:8000 \
+            -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+            -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+            -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
+            -e MODEL_BUCKET_NAME=$MODEL_BUCKET_NAME \
+            -e ENVIRONMENT=production \
+            --restart unless-stopped \
+            $ECR_REPO:latest
+
+      - name: Clean up old images
+        run: |
+          docker image prune -af
+
+      - name: Verify deployment
+        run: |
+          sleep 15
+          curl -f http://localhost:8000/health || exit 1
+          echo "Deployment successful!"
