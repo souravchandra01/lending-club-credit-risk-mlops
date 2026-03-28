@@ -58,7 +58,13 @@ class DataTransformation:
         return df
 
     def _drop_columns(self, df: pd.DataFrame) -> pd.DataFrame:
-        return df.drop(columns=["loan_status", "term"], errors="ignore")
+        drop = [
+            "loan_status", "term", "id", "member_id", "url", "desc",
+            "title", "zip_code", "addr_state", "issue_d", "earliest_cr_line",
+            "last_pymnt_d", "next_pymnt_d", "last_credit_pull_d", "pymnt_plan",
+            "mort_acc", "emp_title", "address"
+            ]
+        return df.drop(columns=[c for c in drop if c in df.columns])
 
     def _encode_categoricals(self, df: pd.DataFrame) -> pd.DataFrame:
         le = LabelEncoder()

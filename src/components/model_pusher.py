@@ -24,13 +24,13 @@ class ModelPusher:
                 )
                 logger.info(f"Model pushed to S3: s3://{self.config.bucket_name}/{self.config.s3_model_key}")
 
-            self.s3.upload_model(
-                file_path=self.evaluation_artifact.preprocessor_path,
-                bucket_name=self.config.bucket_name,
-                s3_key=self.config.s3_preprocessor_key
-            )
+                self.s3.upload_model(
+                    file_path=self.evaluation_artifact.preprocessor_path,
+                    bucket_name=self.config.bucket_name,
+                    s3_key=self.config.s3_preprocessor_key
+                )
 
-            logger.info(f"Preprocessor pushed to S3: s3://{self.config.bucket_name}/{self.config.s3_preprocessor_key}")
+                logger.info(f"Preprocessor pushed to S3: s3://{self.config.bucket_name}/{self.config.s3_preprocessor_key}")
 
             return ModelPusherArtifact(
                 bucket_name=self.config.bucket_name,

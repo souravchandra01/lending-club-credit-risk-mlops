@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan Default Predictor</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="page">
+
+    <div class="top-bar">
+      <div class="header">
+        <h1>Loan Default Predictor</h1>
+        <p>Lending Club Credit Risk — ML powered assessment</p>
+      </div>
+    </div>
+
+    <div id="train-status" class="train-status hidden"></div>
+
+    <!-- Loan Details -->
+    <div class="card">
+      <div class="section-label">Loan Details</div>
+      <div class="grid-3 mb">
+        <div class="field"><label>Loan Amount ($)</label><input type="number" id="loan_amnt" value="15000" /></div>
+        <div class="field"><label>Interest Rate (%)</label><input type="number" id="int_rate" value="13.5" step="0.1" /></div>
+        <div class="field"><label>Term</label>
+          <select id="term">
+            <option>36 months</option>
+            <option>60 months</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label>Installment ($)</label><input type="number" id="installment" value="508" /></div>
+        <div class="field"><label>Grade</label>
+          <select id="grade">
+            <option>A</option><option>B</option><option selected>C</option>
+            <option>D</option><option>E</option><option>F</option><option>G</option>
+          </select>
+        </div>
+        <div class="field"><label>Sub Grade</label>
+          <select id="sub_grade">
+            <option>C1</option><option>C2</option><option selected>C3</option>
+            <option>C4</option><option>C5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Borrower Profile -->
+    <div class="card">
+      <div class="section-label">Borrower Profile</div>
+      <div class="grid-3 mb">
+        <div class="field"><label>Annual Income ($)</label><input type="number" id="annual_inc" value="65000" /></div>
+        <div class="field"><label>Employment Length</label>
+          <select id="emp_length">
+            <option>0</option><option>1 year</option><option>2 years</option>
+            <option>3 years</option><option>4 years</option><option>5 years</option>
+            <option selected>6 years</option><option>7 years</option><option>8 years</option>
+            <option>9 years</option><option>10+ years</option>
+          </select>
+        </div>
+        <div class="field"><label>Home Ownership</label>
+          <select id="home_ownership">
+            <option>RENT</option><option selected>MORTGAGE</option>
+            <option>OWN</option><option>OTHER</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label>DTI</label><input type="number" id="dti" value="18.5" step="0.1" /></div>
+        <div class="field"><label>Verification Status</label>
+          <select id="verification_status">
+            <option>Not Verified</option><option selected>Verified</option>
+            <option>Source Verified</option>
+          </select>
+        </div>
+        <div class="field"><label>Purpose</label>
+          <select id="purpose">
+            <option selected>debt_consolidation</option><option>credit_card</option>
+            <option>home_improvement</option><option>other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credit History -->
+    <div class="card">
+      <div class="section-label">Credit History</div>
+      <div class="grid-3">
+        <div class="field"><label>Open Accounts</label><input type="number" id="open_acc" value="11" /></div>
+        <div class="field"><label>Public Records</label><input type="number" id="pub_rec" value="0" /></div>
+        <div class="field"><label>Revolving Balance ($)</label><input type="number" id="revol_bal" value="14000" /></div>
+        <div class="field"><label>Revolving Util (%)</label><input type="number" id="revol_util" value="52.3" step="0.1" /></div>
+        <div class="field"><label>Total Accounts</label><input type="number" id="total_acc" value="26" /></div>
+        <div class="field"><label>Bankruptcies</label><input type="number" id="pub_rec_bankruptcies" value="0" /></div>
+      </div>
+    </div>
+
+    <button class="predict-btn" id="predict-btn">Predict Default Risk</button>
+
+    <!-- Result -->
+    <div class="result-card hidden" id="result-card">
+      <div class="result-header">
+        <span id="result-badge" class="result-badge"></span>
+        <span class="result-status">Prediction complete</span>
+      </div>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-label">Default probability</div>
+          <div class="metric-value" id="prob-value"></div>
+          <div class="prob-bar-bg"><div class="prob-bar-fill" id="prob-bar"></div></div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Risk assessment</div>
+          <div class="metric-sub" id="risk-label"></div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Confidence</div>
+          <div class="metric-value" id="confidence"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="/static/script.js"></script>
+</body>
+</html>

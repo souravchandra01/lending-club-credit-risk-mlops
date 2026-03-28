@@ -18,14 +18,6 @@ class ModelTrainer:
         self.config = config
         self.transformation_artifact = transformation_artifact
 
-    def _get_model(self) -> LGBMClassifier:
-        return LGBMClassifier(
-            n_estimators=self.config.n_estimators,
-            class_weight=self.config.class_weight,
-            random_state=self.config.random_state,
-            verbose=-1
-        )
-
     def _evaluate(self, y_true, y_pred, y_prob) -> ClassificationMetricArtifact:
         return ClassificationMetricArtifact(
             f1_score=f1_score(y_true, y_pred),
@@ -43,7 +35,13 @@ class ModelTrainer:
             X_train, y_train = train_arr[:, :-1], train_arr[:, -1].astype(int)
             X_test, y_test = test_arr[:, :-1], test_arr[:, -1].astype(int)
 
-            model = self._get_model()
+            scale_pos_weight = len(y_train[y_train == 0]) / len(y_train[y_train == 1])
+            model = LGBMClassifier(
+                n_estimators=self.config.n_estimators,
+                scale_pos_weight=scale_pos_weight,
+                random_state=self.config.random_state,
+                verbose=-1
+            )
 
             # MLflow tracking
             mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
