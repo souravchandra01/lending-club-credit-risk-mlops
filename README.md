@@ -23,6 +23,14 @@
 
 ---
 
+## 🎥 Demo Video
+
+**🎥 [Watch on YouTube](https://youtu.be/eOXew75CoOs)** *(~3 minutes)*
+
+[![Lending Club Loan Prediction MLOps](https://img.youtube.com/vi/eOXew75CoOs/maxresdefault.jpg)](https://youtu.be/eOXew75CoOs)
+
+---
+
 ## 🛠️ Tech Stack
 
 ### ML & Backend
