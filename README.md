@@ -9,6 +9,8 @@
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://www.docker.com/)
 [![AWS](https://img.shields.io/badge/AWS-Deployed-yellow.svg)](https://aws.amazon.com/)
 
+![Architecture Diagram](diagram/architecture.png)
+
 ---
 
 ## ✨ Key Features
