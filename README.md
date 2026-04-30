@@ -1,6 +1,6 @@
 # 🏦 Lending Club Credit Risk MLOps
 
-> A production-grade MLOps pipeline for predicting loan default risk — covering the complete ML lifecycle from data ingestion to cloud deployment with CI/CD automation.
+> Production-grade MLOps pipeline for loan default prediction, implementing an end-to-end workflow from data ingestion to model deployment on AWS with automated CI/CD, experiment tracking, and scalable inference.
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.135.2-green.svg)](https://fastapi.tiangolo.com/)
@@ -9,6 +9,10 @@
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://www.docker.com/)
 [![AWS](https://img.shields.io/badge/AWS-Deployed-yellow.svg)](https://aws.amazon.com/)
 
+---
+
+## 🏗️ Architecture Diagram
+
 ![Architecture Diagram](diagram/architecture.png)
 
 ---
@@ -16,6 +20,7 @@
 ## ✨ Key Features
 
 - **🔄 End-to-End ML Pipeline** - Ingestion → Validation → Transformation → Training → Evaluation → Deployment
+- **🧠 Modular Design** - Separate components for each ML pipeline stage
 - **📊 Experiment Tracking** - MLflow tracks every training run with metrics, params and model artifacts
 - **🔁 Model Versioning** - Best model stored in AWS S3 with threshold-based promotion
 - **🚀 REST API** - FastAPI serves predictions with a clean dark-themed frontend
@@ -50,12 +55,12 @@
 - **GitHub Actions** - CI/CD with self-hosted runner
 
 ### Frontend
-- **Vanilla JS** - No framework overhead
+- **Vanilla JS** - Lightweight frontend
 - **HTML5/CSS3** - Dark themed responsive UI
 
 ---
 
-## 🏗️ Architecture
+## ⚙️ Pipeline Flow (Step-by-Step)
 
 ```
 Raw Data (Lending Club CSV)
@@ -260,7 +265,7 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-**Sourav Chandra**
+**Sourav Chandra** - souravchandra133@gmail.com
 
 **GitHub:** [souravchandra01](https://github.com/souravchandra01)
 
